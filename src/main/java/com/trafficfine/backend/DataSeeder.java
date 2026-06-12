@@ -26,12 +26,14 @@ public class DataSeeder implements CommandLineRunner {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin123"));
         admin.setRole(User.Role.ADMIN);
+        // admin has no phone — they don't receive SMS
         userRepository.save(admin);
 
-        // Create an officer user
+        // Create an officer user with phone number
         User officer = new User();
         officer.setUsername("officer1");
         officer.setPassword(passwordEncoder.encode("pass123"));
+        officer.setPhone("0771234567");   // real phone for SMS
         officer.setRole(User.Role.OFFICER);
         userRepository.save(officer);
 
@@ -45,6 +47,16 @@ public class DataSeeder implements CommandLineRunner {
         parking.setName("Illegal Parking");
         parking.setAmount(1500.0);
         categoryRepository.save(parking);
+
+        FineCategory wrongLane = new FineCategory();
+        wrongLane.setName("Wrong Lane");
+        wrongLane.setAmount(1000.0);
+        categoryRepository.save(wrongLane);
+
+        FineCategory noHelmet = new FineCategory();
+        noHelmet.setName("No Helmet");
+        noHelmet.setAmount(500.0);
+        categoryRepository.save(noHelmet);
 
         // Create a sample unpaid fine
         Fine fine = new Fine();

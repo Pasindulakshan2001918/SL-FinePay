@@ -18,6 +18,8 @@ public class User {
     @Column(nullable = false)
     private String password;   // will be stored encrypted, never plain text
 
+    private String phone;      // officer's mobile number for SMS
+
     @Enumerated(EnumType.STRING)
     private Role role;         // OFFICER or ADMIN
 

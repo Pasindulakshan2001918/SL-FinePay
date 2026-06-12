@@ -3,6 +3,7 @@ package com.trafficfine.backend.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,9 +25,17 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())        // disable CSRF for REST APIs
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()   // login is public
-                .requestMatchers("/api/fines/**").permitAll()  // fine lookup/pay is public
-                .anyRequest().authenticated()                   // everything else needs token
+                // login — public, anyone can call
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/error").permitAll() 
+                // driver looks up a fine — public, no login needed
+                .requestMatchers(HttpMethod.GET, "/api/fines/**").permitAll()
+                // driver pays a fine — public, no login needed
+                .requestMatchers(HttpMethod.POST, "/api/fines/*/pay").permitAll()
+                // officer creates a fine — must be logged in as OFFICER
+                .requestMatchers(HttpMethod.POST, "/api/fines/create").authenticated()
+                // everything else (admin endpoints) — must be authenticated
+                .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

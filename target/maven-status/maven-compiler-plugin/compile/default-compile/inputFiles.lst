@@ -3,6 +3,9 @@ D:\backend\src\main\java\com\trafficfine\backend\controller\AdminController.java
 D:\backend\src\main\java\com\trafficfine\backend\controller\AuthController.java
 D:\backend\src\main\java\com\trafficfine\backend\controller\FineController.java
 D:\backend\src\main\java\com\trafficfine\backend\DataSeeder.java
+D:\backend\src\main\java\com\trafficfine\backend\dto\CreateFineRequest.java
+D:\backend\src\main\java\com\trafficfine\backend\dto\FineResponse.java
+D:\backend\src\main\java\com\trafficfine\backend\dto\RegisterOfficerRequest.java
 D:\backend\src\main\java\com\trafficfine\backend\model\Fine.java
 D:\backend\src\main\java\com\trafficfine\backend\model\FineCategory.java
 D:\backend\src\main\java\com\trafficfine\backend\model\User.java
