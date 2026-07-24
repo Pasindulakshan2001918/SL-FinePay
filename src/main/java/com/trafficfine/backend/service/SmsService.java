@@ -8,8 +8,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class SmsService {
 
     // Sign up at notify.lk to get these values
-    private static final String USER_ID = "YOUR_NOTIFY_LK_USER_ID";
-    private static final String API_KEY = "YOUR_NOTIFY_LK_API_KEY";
+    private static final String USER_ID = "32478";
+    private static final String API_KEY = "WAOmzYBXSdEShJjoUKDQ";
     private static final String SENDER_ID = "NotifyDEMO";
 
     public void sendSms(String phoneNumber, String message) {
